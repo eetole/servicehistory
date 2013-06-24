@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateServiceHistoryEntityTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateServiceHistoryEntityLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{serviceHistoryEntityController.selected.description}" title="#{bundle.CreateServiceHistoryEntityTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateServiceHistoryEntityLabel_kilometres}" for="kilometres" />
+                    <h:inputText id="kilometres" value="#{serviceHistoryEntityController.selected.kilometres}" title="#{bundle.CreateServiceHistoryEntityTitle_kilometres}" />
+                    <h:outputLabel value="#{bundle.CreateServiceHistoryEntityLabel_vehicleName}" for="vehicleName" />
+                    <h:inputText id="vehicleName" value="#{serviceHistoryEntityController.selected.vehicleName}" title="#{bundle.CreateServiceHistoryEntityTitle_vehicleName}" />
+                    <h:outputLabel value="#{bundle.CreateServiceHistoryEntityLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{serviceHistoryEntityController.selected.id}" title="#{bundle.CreateServiceHistoryEntityTitle_id}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{serviceHistoryEntityController.create}" value="#{bundle.CreateServiceHistoryEntitySaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{serviceHistoryEntityController.prepareList}" value="#{bundle.CreateServiceHistoryEntityShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateServiceHistoryEntityIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
