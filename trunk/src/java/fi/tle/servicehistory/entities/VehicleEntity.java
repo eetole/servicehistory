@@ -5,55 +5,50 @@
 package fi.tle.servicehistory.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author toni
+ * @author
+ * leppaton
  */
 @Entity
-@Table (name = "service_histories")
-public class ServiceHistoryEntity implements Serializable {
+@Table (name = "vehicles")
+public class VehicleEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String description;
-    private int kilometres;
 
-    @ManyToOne
-    private VehicleEntity vehicle;
+    @Column( name = "vehicle_name")
+    private String vehicleName;
+    
+    @OneToMany(mappedBy = "vehicle")
+    private List<ServiceHistoryEntity> services;
 
-    public VehicleEntity getVehicle() {
-        return vehicle;
+    public String getVehicleName() {
+        return vehicleName;
     }
 
-    public void setVehicle(VehicleEntity vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
     }
 
-    public String getDescription() {
-        return description;
+    public List<ServiceHistoryEntity> getServices() {
+        return services;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setServices(List<ServiceHistoryEntity> services) {
+        this.services = services;
     }
-
-    public int getKilometres() {
-        return kilometres;
-    }
-
-    public void setKilometres(int kilometres) {
-        this.kilometres = kilometres;
-    }
-
+    
     public Long getId() {
         return id;
     }
@@ -72,10 +67,10 @@ public class ServiceHistoryEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ServiceHistoryEntity)) {
+        if (!(object instanceof VehicleEntity)) {
             return false;
         }
-        ServiceHistoryEntity other = (ServiceHistoryEntity) object;
+        VehicleEntity other = (VehicleEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -84,7 +79,7 @@ public class ServiceHistoryEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "fi.mtie36.servicehistory.entities.ServiceHistoryEntity[ id=" + id + " ]";
+        return "fi.tle.servicehistory.entities.VehicleEntity[ id=" + id + " ]";
     }
     
 }

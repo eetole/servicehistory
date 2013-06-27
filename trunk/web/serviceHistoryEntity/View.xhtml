@@ -15,12 +15,12 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewServiceHistoryEntityLabel_vehicle}"/>
+                    <h:outputText value="#{serviceHistoryEntityController.selected.vehicle}" title="#{bundle.ViewServiceHistoryEntityTitle_vehicle}"/>
                     <h:outputText value="#{bundle.ViewServiceHistoryEntityLabel_description}"/>
                     <h:outputText value="#{serviceHistoryEntityController.selected.description}" title="#{bundle.ViewServiceHistoryEntityTitle_description}"/>
                     <h:outputText value="#{bundle.ViewServiceHistoryEntityLabel_kilometres}"/>
                     <h:outputText value="#{serviceHistoryEntityController.selected.kilometres}" title="#{bundle.ViewServiceHistoryEntityTitle_kilometres}"/>
-                    <h:outputText value="#{bundle.ViewServiceHistoryEntityLabel_vehicleName}"/>
-                    <h:outputText value="#{serviceHistoryEntityController.selected.vehicleName}" title="#{bundle.ViewServiceHistoryEntityTitle_vehicleName}"/>
                     <h:outputText value="#{bundle.ViewServiceHistoryEntityLabel_id}"/>
                     <h:outputText value="#{serviceHistoryEntityController.selected.id}" title="#{bundle.ViewServiceHistoryEntityTitle_id}"/>
                 </h:panelGrid>

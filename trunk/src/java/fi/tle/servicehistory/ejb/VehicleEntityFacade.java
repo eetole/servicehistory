@@ -4,7 +4,7 @@
  */
 package fi.tle.servicehistory.ejb;
 
-import fi.tle.servicehistory.entities.ServiceHistoryEntity;
+import fi.tle.servicehistory.entities.VehicleEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * leppaton
  */
 @Stateless
-public class ServiceHistoryEntityFacade extends AbstractFacade<ServiceHistoryEntity> {
+public class VehicleEntityFacade extends AbstractFacade<VehicleEntity> {
     @PersistenceContext(unitName = "ServiceHistoryPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class ServiceHistoryEntityFacade extends AbstractFacade<ServiceHistoryEnt
         return em;
     }
 
-    public ServiceHistoryEntityFacade() {
-        super(ServiceHistoryEntity.class);
+    public VehicleEntityFacade() {
+        super(VehicleEntity.class);
     }
     
 }

@@ -1,9 +1,9 @@
 package fi.tle.servicehistory.jsf;
 
-import fi.tle.servicehistory.entities.ServiceHistoryEntity;
+import fi.tle.servicehistory.entities.VehicleEntity;
 import fi.tle.servicehistory.jsf.util.JsfUtil;
 import fi.tle.servicehistory.jsf.util.PaginationHelper;
-import fi.tle.servicehistory.ejb.ServiceHistoryEntityFacade;
+import fi.tle.servicehistory.ejb.VehicleEntityFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -19,29 +19,29 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 
-@ManagedBean(name="serviceHistoryEntityController")
+@ManagedBean(name="vehicleEntityController")
 @SessionScoped
-public class ServiceHistoryEntityController implements Serializable {
+public class VehicleEntityController implements Serializable {
 
 
-    private ServiceHistoryEntity current;
+    private VehicleEntity current;
     private DataModel items = null;
-    @EJB private fi.tle.servicehistory.ejb.ServiceHistoryEntityFacade ejbFacade;
+    @EJB private fi.tle.servicehistory.ejb.VehicleEntityFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public ServiceHistoryEntityController() {
+    public VehicleEntityController() {
     }
 
-    public ServiceHistoryEntity getSelected() {
+    public VehicleEntity getSelected() {
         if (current == null) {
-            current = new ServiceHistoryEntity();
+            current = new VehicleEntity();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private ServiceHistoryEntityFacade getFacade() {
+    private VehicleEntityFacade getFacade() {
         return ejbFacade;
     }
     public PaginationHelper getPagination() {
@@ -68,13 +68,13 @@ public class ServiceHistoryEntityController implements Serializable {
     }
 
     public String prepareView() {
-        current = (ServiceHistoryEntity)getItems().getRowData();
+        current = (VehicleEntity)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new ServiceHistoryEntity();
+        current = new VehicleEntity();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class ServiceHistoryEntityController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ServiceHistoryEntityCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VehicleEntityCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class ServiceHistoryEntityController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (ServiceHistoryEntity)getItems().getRowData();
+        current = (VehicleEntity)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class ServiceHistoryEntityController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ServiceHistoryEntityUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VehicleEntityUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class ServiceHistoryEntityController implements Serializable {
     }
 
     public String destroy() {
-        current = (ServiceHistoryEntity)getItems().getRowData();
+        current = (VehicleEntity)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class ServiceHistoryEntityController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ServiceHistoryEntityDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("VehicleEntityDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,15 +188,15 @@ public class ServiceHistoryEntityController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=ServiceHistoryEntity.class)
-    public static class ServiceHistoryEntityControllerConverter implements Converter {
+    @FacesConverter(forClass=VehicleEntity.class)
+    public static class VehicleEntityControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ServiceHistoryEntityController controller = (ServiceHistoryEntityController)facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "serviceHistoryEntityController");
+            VehicleEntityController controller = (VehicleEntityController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "vehicleEntityController");
             return controller.ejbFacade.find(getKey(value));
         }
 
@@ -216,11 +216,11 @@ public class ServiceHistoryEntityController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof ServiceHistoryEntity) {
-                ServiceHistoryEntity o = (ServiceHistoryEntity) object;
+            if (object instanceof VehicleEntity) {
+                VehicleEntity o = (VehicleEntity) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+ServiceHistoryEntity.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+VehicleEntity.class.getName());
             }
         }
 
