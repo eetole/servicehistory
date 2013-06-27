@@ -15,12 +15,14 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditServiceHistoryEntityLabel_vehicle}" for="vehicle" />
+                    <h:selectOneMenu id="vehicle" value="#{serviceHistoryEntityController.selected.vehicle}" title="#{bundle.EditServiceHistoryEntityTitle_vehicle}" >
+                        <f:selectItems value="#{vehicleEntityController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditServiceHistoryEntityLabel_description}" for="description" />
                     <h:inputText id="description" value="#{serviceHistoryEntityController.selected.description}" title="#{bundle.EditServiceHistoryEntityTitle_description}" />
                     <h:outputLabel value="#{bundle.EditServiceHistoryEntityLabel_kilometres}" for="kilometres" />
                     <h:inputText id="kilometres" value="#{serviceHistoryEntityController.selected.kilometres}" title="#{bundle.EditServiceHistoryEntityTitle_kilometres}" />
-                    <h:outputLabel value="#{bundle.EditServiceHistoryEntityLabel_vehicleName}" for="vehicleName" />
-                    <h:inputText id="vehicleName" value="#{serviceHistoryEntityController.selected.vehicleName}" title="#{bundle.EditServiceHistoryEntityTitle_vehicleName}" />
                     <h:outputLabel value="#{bundle.EditServiceHistoryEntityLabel_id}" for="id" />
                     <h:inputText id="id" value="#{serviceHistoryEntityController.selected.id}" title="#{bundle.EditServiceHistoryEntityTitle_id}" />
                 </h:panelGrid>
